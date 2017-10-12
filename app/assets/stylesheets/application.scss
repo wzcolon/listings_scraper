@@ -1,0 +1,16 @@
+@import "materialize";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "navigation";
+@import "scrapes";
+
+body {
+  background-color: #fcfcfc;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}

@@ -1,0 +1,23 @@
+#new-scrape-btn {
+  height: 60px;
+}
+
+#message-container {
+  .card-panel {
+    height: 40px;
+    font-weight: 500;
+    padding: 10px;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+#scrapes-table {
+  tr td.scrape-actions {
+    .btn {
+      margin-right: 10px;
+    }
+  }
+}

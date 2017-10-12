@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'pages#index'
+
+  resources :scrapes, only: %w(show) do
+    resource :summary, only: %w(show), controller: 'scrapes/summary'
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :scrapes, only: %w(index destroy create)
+    end
+  end
 end

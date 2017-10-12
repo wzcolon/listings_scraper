@@ -1,0 +1,21 @@
+.row
+  .col.s12
+    =link_to 'Back', root_path, class: 'btn'
+    %h3= "#{scrape.scrape_type.capitalize} Summary"
+    %p
+      Scraped at
+      = formatted_time(scrape.created_at)
+.row
+  .col.s9
+    %table#scrape-summary-table.bordered.striped
+      %thead
+        %tr
+          %th Range
+          %th Count
+      %tbody
+        - @ranges.each do |range, count|
+          %tr
+            %td= "#{range.min} - #{range.max}"
+            %td= count
+  .col.s3
+    %p NOTE: This table omits any range for which the count of objects that fell within it was 0.

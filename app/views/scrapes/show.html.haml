@@ -1,0 +1,26 @@
+.row
+  .col.s12
+    =link_to 'Back', root_path, class: 'btn'
+    %h3= scrape.scrape_type.capitalize
+    %p
+      Scraped at
+      = formatted_time(scrape.created_at)
+.row
+  .col.s12
+    = will_paginate listings
+
+    %table#listings-table.bordered.striped
+      %thead
+        %tr
+          %th Title
+          %th Price
+          %th Date
+      %tbody
+        - listings.each do |listing|
+          %tr
+            %td
+              =link_to listing.title, listing.link
+            %td= listing.price
+            %td= listing.date
+  = will_paginate listings
+
