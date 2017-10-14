@@ -7,20 +7,26 @@
       = formatted_time(scrape.created_at)
 .row
   .col.s12
-    = will_paginate listings
+    .row
+      #listing-search.col.s4
+        = search_form_for @search, url: scrape_path(scrape) do |f|
+          .input-field
+            = f.search_field :title_cont, id: 'listing-search-input', placeholder: 'Search'
+          = f.submit class: 'btn blue lighten-1'
+    = will_paginate @listings
 
     %table#listings-table.bordered.striped
       %thead
         %tr
-          %th Title
-          %th Price
+          %th= sort_link(@search, :title, default_order: :desc)
+          %th= sort_link(@search, :price, default_order: :desc)
           %th Date
       %tbody
-        - listings.each do |listing|
+        - @listings.each do |listing|
           %tr
             %td
               =link_to listing.title, listing.link
             %td= listing.price
             %td= listing.date
-  = will_paginate listings
+  = will_paginate @listings
 

@@ -21,6 +21,7 @@ export default class ProgressIndicator extends React.Component {
 
   render() {
     let display = this.state.visible ? '' : 'hidden'
+
     return(
       <div className={"progress " + display}>
         <div className="indeterminate"></div>

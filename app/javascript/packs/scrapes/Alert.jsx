@@ -13,8 +13,7 @@ export default class Alert extends React.Component {
 
     this.state = {
       className: this.findClassName(this.props.type),
-      message: props.message,
-      visible: true
+      message: props.message
     }
   }
 
@@ -29,11 +28,9 @@ export default class Alert extends React.Component {
 
   render() {
     return(
-        this.state.visible
-        ? <div className={"card-panel lighten-2 center-align " + this.state.className} >
-            {this.state.message}
-          </div>
-        : <span />
+      <div className={"card-panel lighten-2 center-align " + this.state.className} >
+        {this.state.message}
+      </div>
     )
   }
 }

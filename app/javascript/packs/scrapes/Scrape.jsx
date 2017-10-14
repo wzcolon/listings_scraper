@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Timestamp from 'react-timestamp'
+import Alert from './Alert'
 
 export default class Scrape extends React.Component {
   static propTypes = {
@@ -15,26 +16,44 @@ export default class Scrape extends React.Component {
     super(props);
 
     this.state = {
-      id: props.id,
       scrapeType: props.scrapeType,
       date: props.date
     }
 
-    this.deleteHandler = this.deleteHandler.bind(this);
+    this.deleteScrape = this.deleteScrape.bind(this);
     this.showScrape = this.showScrape.bind(this);
     this.showScrapeSummary = this.showScrapeSummary.bind(this);
   }
 
-  deleteHandler() {
-    this.props.onDelete(this.props.id)
+  deleteScrape(id) {
+    this.props.onDelete(id)
+    this.displayDeleteMsg()
+
+    $.ajax({
+      url: `/api/v1/scrapes/${id}`,
+      method: 'delete',
+      contentType: 'application/json',
+    })
   }
 
   showScrape() {
-    window.location.href = `/scrapes/${this.state.id}`
+    window.location.href = `/scrapes/${this.props.id}`
   }
 
   showScrapeSummary() {
-    window.location.href = `/scrapes/${this.state.id}/summary`
+    window.location.href = `/scrapes/${this.props.id}/summary`
+  }
+
+  displayDeleteMsg() {
+    let deleteAlert = <Alert message='Successfully deleted scrape' />
+
+    ReactDOM.render(
+      deleteAlert, document.getElementById('message-container')
+    )
+
+    setTimeout(function(){
+      ReactDOM.unmountComponentAtNode(document.getElementById('message-container'))
+    }.bind(this), 1000);
   }
 
   render() {
@@ -42,7 +61,7 @@ export default class Scrape extends React.Component {
       <tr>
         <td>{this.state.scrapeType}</td>
         <td>
-          <Timestamp time={this.state.date} format='full' />
+          <Timestamp time={this.state.date} utc={false} format='full' />
         </td>
         <td className="scrape-actions right-align">
           <a
@@ -59,7 +78,7 @@ export default class Scrape extends React.Component {
           </a>
           <a
             className="waves-effect waves-light btn red lighten-1"
-            onClick={this.deleteHandler}
+            onClick={() => {this.deleteScrape(this.props.id)}}
           >
             Delete
           </a>
