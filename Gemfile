@@ -16,6 +16,7 @@ gem 'materialize-sass'
 gem 'haml'
 gem 'jquery-rails'
 gem 'will_paginate'
+gem 'ransack'
 
 group :development, :test do
   gem 'capybara'

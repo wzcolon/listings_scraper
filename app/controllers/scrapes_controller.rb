@@ -1,16 +1,14 @@
 class ScrapesController < ApplicationController
   def show
+    @search = scrape.listings.ransack(params[:q])
+
+    @listings= @search.result(distinct: true).paginate(
+      page: params[:page],
+      per_page: 50
+    )
   end
 
   private
-
-  def listings
-    @listings ||= scrape.listings.paginate(
-      page: params[:page],
-      per_page: 100
-    )
-  end
-  helper_method :listings
 
   def scrape
     @scrape ||= Scrape.find(params[:id])
