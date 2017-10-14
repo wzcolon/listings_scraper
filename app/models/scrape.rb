@@ -2,7 +2,7 @@ class Scrape < ApplicationRecord
   APARTMENTS_URL = 'http://raleigh.craigslist.org/search/apa'
   CARS_URL = 'https://raleigh.craigslist.org/search/cta'
 
-  has_many :listings
+  has_many :listings, dependent: :destroy
   validates :scrape_type, presence: true
 
   def self.url_for(scrape_type)
