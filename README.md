@@ -1,24 +1,42 @@
-# README
+# Adwerx Cragislist Scraper
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+### Extract or Clone the Repository
 
-* Ruby version
+If you received a gzipped tarball...
+`tar -xzf listings_scraper.tar.gz && cd ./listings_scraper`
 
-* System dependencies
+Otherwise, clone the repo
+`git@github.com:wzcolon/listings_scraper.git`
 
-* Configuration
+### Ruby Version
 
-* Database creation
+Rails 5 requires Ruby 2.2.2 or higher. This project has a `.ruby-version` file specifying Ruby 2.4.1. Ensure you're running a compatible version before bundling dependencies.
 
-* Database initialization
+### Bundle up!
 
-* How to run the test suite
+`bundle install`
 
-* Services (job queues, cache servers, search engines, etc.)
+### Create the database
 
-* Deployment instructions
+`bundle exec rake db:create db:schema:load`
 
-* ...
+### Intall JS dependencies
+
+`yarn`
+
+### Start webpacker in dev mode
+
+Note that it is important to specify the host to avoid cross-orgin issues with
+Puma config that starts on 0.0.0.0 rather than 127.0.0.1.
+
+`./bin/webpack-dev-server --host 0.0.0.0`
+
+### Start a Rails server
+
+`bundle exec rails s`
+
+### Visit the application
+
+[Adwerx Cragislist Scraper](http://localhost:3000)
